@@ -26,6 +26,7 @@ function Navbar(props) {
                 width="30"
                 height="30"
                 src={`data:image/png;base64,${new Identicon(props.account, 30).toString()}`}
+                alt="profile img"
               />
             </>
           ) : (

@@ -56,8 +56,6 @@ function App() {
       window.location.reload();
       // Run any other necessary logic...
     }
-    // console.log(_chainId);
-    // window.location.reload();
   };
 
   let currentAccount = null;

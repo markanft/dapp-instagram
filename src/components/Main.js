@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Identicon from 'identicon.js';
 import web3 from 'web3';
 
-console.log(window.ethereum);
 function Main(props) {
   let imageDescription;
 
@@ -50,13 +49,14 @@ function Main(props) {
                       width="30"
                       height="30"
                       src={`data:image/png;base64,${new Identicon(image.author, 30).toString()}`}
+                      alt="profile img"
                     />
                     <small className="text-muted">{image.author}</small>
                   </div>
                   <ul id="imageList" className="list-group list-group-flush">
                     <li className="list-group-item">
                       <p className="text-center">
-                        <img src={`https://ipfs.infura.io/ipfs/${image.hash}`} style={{ maxWidth: '420px' }} />
+                        <img src={`https://ipfs.infura.io/ipfs/${image.hash}`} style={{ maxWidth: '420px' }} alt="" />
                       </p>
                       <p>{image.description}</p>
                     </li>
@@ -69,7 +69,6 @@ function Main(props) {
                         name={image.id}
                         onClick={event => {
                           let tipAmount = web3.utils.toWei('0.1', 'Ether');
-                          console.log(event.target.name, tipAmount);
                           props.tipImageOwner(event.target.name, tipAmount);
                         }}
                       >
