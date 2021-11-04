@@ -124,7 +124,6 @@ function App() {
 
   const uploadImage = description => {
     console.log('Submiting dile to ipfs');
-
     ipfs
       .add(buffer)
       .then(result => {
@@ -133,8 +132,8 @@ function App() {
         dappinstagram.methods
           .uploadImage(result[0].hash, description)
           .send({ from: account })
-          .on('transactionHash', hash => {
-            setLoading(false);
+          .on('confirmation', hash => {
+            window.location.reload();
           });
       })
       .catch(error => {
@@ -147,8 +146,8 @@ function App() {
     dappinstagram.methods
       .tipImageOwner(id)
       .send({ from: account, value: tipAmount })
-      .on('transactionHash', hash => {
-        setLoading(false);
+      .on('confirmation', hash => {
+        window.location.reload();
       });
   };
 
