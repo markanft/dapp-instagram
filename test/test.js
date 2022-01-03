@@ -65,11 +65,9 @@ contract('Dappinstagram', ([_, author, tipper]) => {
         let oldAuthorBalance;
         oldAuthorBalance = await web3.eth.getBalance(author);
         oldAuthorBalance = new web3.utils.BN(oldAuthorBalance);
-        console.log(oldAuthorBalance.toString());
 
         let sd = await web3.eth.getBalance(tipper);
         sd = new web3.utils.BN(sd);
-        console.log(sd.toString());
 
         let result = await dappinstagram.tipImageOwner(imageCount, {
           from: tipper,
@@ -78,11 +76,6 @@ contract('Dappinstagram', ([_, author, tipper]) => {
 
         let qw = await web3.eth.getBalance(tipper);
         qw = new web3.utils.BN(qw);
-        console.log('cost tipper');
-        console.log(sd.toString() - qw.toString());
-
-        console.log('holi');
-        console.log(result.receipt.gasUsed);
 
         // SUCCESS
         const event = result.logs[0].args;
@@ -96,8 +89,6 @@ contract('Dappinstagram', ([_, author, tipper]) => {
         let newAuthorBalance;
         newAuthorBalance = await web3.eth.getBalance(author);
         newAuthorBalance = new web3.utils.BN(newAuthorBalance);
-        console.log(newAuthorBalance.toString());
-        console.log(newAuthorBalance - oldAuthorBalance);
 
         let tipImageOwner;
         tipImageOwner = web3.utils.toWei('1', 'Ether');

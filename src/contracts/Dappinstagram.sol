@@ -12,7 +12,7 @@ contract Dappinstagram {
     string hash;
     string description;
     uint256 tipAmount;
-    address author;
+    address payable author;
   }
   mapping(uint256 => Image) public images;
 
@@ -25,18 +25,17 @@ contract Dappinstagram {
     require(msg.sender != address(0x0));
 
     imageCount++;
-    images[imageCount] = Image(imageCount, imageHash, description, 0, msg.sender);
+    images[imageCount] = Image(imageCount, imageHash, description, 0, payable(msg.sender));
     emit ImageCreated(imageCount, imageHash, description, 0, msg.sender);
   }
 
   function tipImageOwner(uint256 id) public payable {
     require(id > 0 && id <= imageCount);
     Image memory image = images[id];
-    address author = image.author;
-    payable(author).transfer(msg.value);
+    image.author.transfer(msg.value);
     image.tipAmount += msg.value;
     images[id] = image;
 
-    emit ImageTipped(id, image.hash, image.description, image.tipAmount, author);
+    emit ImageTipped(id, image.hash, image.description, image.tipAmount, image.author);
   }
 }
